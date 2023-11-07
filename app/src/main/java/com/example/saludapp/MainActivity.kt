@@ -1,5 +1,6 @@
 package com.example.saludapp
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -19,7 +20,11 @@ class MainActivity : AppCompatActivity() {
             if (name.isNotEmpty()) {
                 Snackbar.make(btnHello, "Hola $name!", Snackbar.LENGTH_SHORT)
                     .setAnchorView(btnHello)
-                    .setAction("RESET") { etName.setText(null)}
+                    .setAction("NEXT_SCREEN") {
+                        val intentGA = Intent(this, GreetingActivity::class.java)
+                        intentGA.putExtra("EXTRA_NAME", name)
+                        startActivity(intentGA)
+                    }
                     .show()
             } else {
                 Toast.makeText(this, "Introduce un nombre", Toast.LENGTH_LONG).show()
